@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temporary</title>
+    <style>
+        body {
+            width: 100%;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            min-height: 100vh;
+            background: #f4f7f6;
+        }
+        .sidebar {
+            width: 200px;
+            background: #333;
+            color: white;
+            padding: 1.5em;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            height: 100vh;
+            top: 0;
+            left: 0;
+        }
+
+        .sidebar h2 {
+            font-size: 1.5em;
+            margin-bottom: 1.5em;
+            text-align: center;
+            color: #87CEEB;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .sidebar ul li {
+            margin: 1.5em 0;
+        }
+
+        .sidebar ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.1em;
+            transition: color 0.3s ease-in-out;
+        }
+
+        .sidebar ul li a:hover {
+            color: #4CAF50;
+        }
+
+        .header {
+            background: linear-gradient(to right, #4facfe, #00f2fe);
+            padding: 1em 2em;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 7px 8px rgba(0, 0, 0, 0.1);
+            width: calc(100% - 315px);
+            margin-left: 250px;
+            z-index: 1000;
+            position: fixed;
+            top: 0;
+            left: 0;
+        }
+
+        
+        
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+                padding: 1em;
+            }
+            
+            .header {
+                width: 100%;
+                margin-left: 0;
+                padding: 1em;
+                position: relative;
+            }
+
+            .main-content {
+                margin-left: 0;
+                margin-top: 20px;
+                width: 100%;
+                padding: 1em;
+            }
+        }
+        
+        .header .user-info {
+            display: flex;
+            align-items: center;
+        }
+        
+        .header .user-info img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        
+        .header .user-info span {
+            font-size: 1.1em;
+            color: #333;
+        }
+        
+        .header .user-info:hover {
+            cursor: pointer;
+        }
+        
+        .header button {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 0.8em 1.5em;
+            font-size: 1em;
+            cursor: pointer;
+            border-radius: 10px;
+            transition: background 0.3s ease-in-out;
+        }
+        
+        .header button:hover {
+            background: #45a049;
+        }
+        
+        
+        .main-content {
+            margin-left: 420px;
+            margin-top: 80px;
+            padding: 2em;
+            width: calc(100% - 250px);
+            background: #f4f7f6;
+            position: relative;
+        }
+        .main-content h1 {
+            font-size: 3em;
+            font-style: italic;
+            color: salmon;
+            margin-bottom: 1em;
+        }
+
+        .main-content p {
+            font-size: 1.1em;
+            line-height: 1.6;
+            color: #555;
+        }
+
+        .form-section {
+            width: 100%;
+            max-width: 600px;
+            margin-top: 30px;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .form-section h2 {
+            text-decoration: underline;
+            margin-top: 40px;
+            margin-bottom: 5px;
+            font-size: 1.5em;
+            color: #333;
+        }
+
+        .form-section label {
+            display: block;
+            font-size: 1em;
+            color: #555;
+            margin-bottom: 5px;
+        }
+        .lifestyle *, .privacy *, .food *{
+            margin: 10px;
+        }
+        .lifestyle, .privacy, .food, .sleepSchedule, .study-habits{
+            border-radius: 7px;
+            margin-top: 0px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background-color: white;
+        }
+         .lifestyle label, .privacy label, .food label{
+            display: inline;
+        }
+        #para{
+            display: inline;
+            font-weight: 800;
+            color: salmon;
+        }
+        
+        .form-section input[type="text"],
+        .form-section input[type="time"],
+        .form-section select,
+        .form-section textarea {
+            width: 90%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+
+        .form-section textarea {
+            resize: none;
+        }
+
+        .form-section button {
+            padding: 10px 15px;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease-in-out;
+        }
+
+        .form-section button:hover {
+            background: #45a049;
+        }
+
+        .form-section div {
+            margin-bottom: 10px;
+        }
+
+        .form-section input[type="radio"],
+        .form-section input[type="checkbox"] {
+            margin-right: 10px;
+        }
+
+        .noise-tolerance-table {
+            width: 100%;
+            margin-bottom: 20px;
+            border-collapse: collapse;
+        }
+
+        .noise-tolerance-table th,
+        .noise-tolerance-table td {
+            text-align: center;
+            padding: 8px;
+            border: 1px solid #ccc;
+        }
+
+        .noise-tolerance-table th {
+            background: #f4f7f6;
+        }
+
+        .noise-tolerance-table input[type="radio"] {
+            margin: 0 auto;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+                padding: 1em;
+            }
+
+            .header {
+                width: 100%;
+                margin-left: 0;
+                padding: 1em;
+            }
+
+            .main-content {
+                margin-left: 0;
+                margin-top: 20px;
+                /* Adjust for stacked header and sidebar */
+                width: 100%;
+                padding: 1em;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h2>UniRoomie</h2>
+        <ul>
+            <li><a href="dashboardLogin.html">Dashboard</a></li>
+            <li><a href="#roommates">Find Roommates</a></li>
+            <li><a href="#messages">Messages</a></li>
+            <li><a href="#settings">Change Room</a></li>
+            <li><a href="preferenceForm.html">Preference Form</a></li>
+            <li><a href="#help">Contact Us</a></li>
+        </ul>
+    </div>
+
+    <!-- Header -->
+    <div class="main-content">
+        <div class="header">
+            <div class="user-info">
+                <img src="user-icon.avif" alt="User Avatar">
+                <span>John Doe</span>
+            </div>
+            <button onclick="logout()">Logout</button>
+        </div>
+
+        <!-- Main Content -->
+        <h1>Preference Form</h1>
+        <p>Fill out your preferences to help us find the best roommate for you.</p>
+
+        <!-- Form Section -->
+        <div class="form-section">
+            <form id="preferenceForm">
+                <h2>Sleep Schedule</h2>
+                <div class="sleepSchedule">
+
+                    <label for="sleepSchedule"><p id="para">1.</p> What best describes your typical sleep schedule?</label>
+                    <select id="sleepSchedule" name="sleepSchedule">
+                        <option value="earlySleeper">Early Sleeper</option>
+                        <option value="lateSleeper">Late Sleeper</option>
+                        <option value="nightOwl">Night Owl</option>
+                        <option value="irregular">Irregular Schedule</option>
+                    </select>
+    
+                    <label for="bedTime"><p id="para">2.</p> What time do you usually go to bed?</label>
+                    <input type="time" id="bedTime" name="bedTime">
+    
+                    <label for="wakeTime"><p id="para">3.</p> What time do you usually wake up?</label>
+                    <input type="time" id="wakeTime" name="wakeTime">
+    
+                    <label for="sleepHours"><p id="para">4.</p> How many hours of sleep do you typically get in a day?</label>
+                    <input type="text" id="sleepHours" name="sleepHours" placeholder="Enter hours">
+                </div>
+
+                <h2>Study Habits & Noise</h2>
+                <div class="study-habits">
+
+                    <label for="studyPreference"><p id="para">1.</p> How do you prefer to study?</label>
+                    <select id="studyPreference" name="studyPreference">
+                        <option value="completeSilence">In complete silence</option>
+                        <option value="lightBackgroundNoise">With light background noise</option>
+                        <option value="musicHeadphones">With music (Headphones/Earphones)</option>
+                        <option value="musicSpeakers">With music (Speakers)</option>
+                    </select>
+    
+                    <label><p id="para">2.</p> On a scale of 0 to 4, please rate your tolerance for the following types of noise:</label>
+                    <table class="noise-tolerance-table">
+                        <tr>
+                            <th></th>
+                            <th>Extremely intolerant</th>
+                            <th>1</th>
+                            <th>2</th>
+                            <th>3</th>
+                            <th>Very tolerant</th>
+                        </tr>
+                        <tr>
+                            <td>Music</td>
+                            <td><input type="radio" name="musicTolerance" value="0"></td>
+                            <td><input type="radio" name="musicTolerance" value="1"></td>
+                            <td><input type="radio" name="musicTolerance" value="2"></td>
+                            <td><input type="radio" name="musicTolerance" value="3"></td>
+                            <td><input type="radio" name="musicTolerance" value="4"></td>
+                        </tr>
+                        <tr>
+                            <td>Loud conversations</td>
+                            <td><input type="radio" name="conversationTolerance" value="0"></td>
+                            <td><input type="radio" name="conversationTolerance" value="1"></td>
+                            <td><input type="radio" name="conversationTolerance" value="2"></td>
+                            <td><input type="radio" name="conversationTolerance" value="3"></td>
+                            <td><input type="radio" name="conversationTolerance" value="4"></td>
+                        </tr>
+                        <tr>
+                            <td>Games</td>
+                            <td><input type="radio" name="gamesTolerance" value="0"></td>
+                            <td><input type="radio" name="gamesTolerance" value="1"></td>
+                            <td><input type="radio" name="gamesTolerance" value="2"></td>
+                            <td><input type="radio" name="gamesTolerance" value="3"></td>
+                            <td><input type="radio" name="gamesTolerance" value="4"></td>
+                        </tr>
+                    </table>
+                </div>
+
+                <h2>Lifestyle & Preferences</h2>
+                <div class="lifestyle">
+
+                    <label><p id="para">1.</p> Are you willing to share your belongings or food with a roommate?</label>
+                    <div>
+                        <input type="radio" id="shareYes" name="shareBelongings" value="Yes">
+                        <label for="shareYes">Yes</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="shareFew" name="shareBelongings" value="Yes but only few">
+                        <label for="shareFew">Yes, but only few (e.g., food, tools)</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="shareNo" name="shareBelongings" value="Prefer personal boundaries">
+                        <label for="shareNo">Prefer personal boundaries</label>
+                    </div>
+    
+                    
+                    <label><p id="para">2.</p> Would you be comfortable with your roommate gaming or playing video games in the room?</label>
+                    <div>
+                        <input type="radio" id="gamingYes" name="gamingComfort" value="Yes">
+                        <label for="gamingYes">Yes</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="gamingNo" name="gamingComfort" value="No">
+                        <label for="gamingNo">No</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="gamingDepends" name="gamingComfort" value="Depends on the volume/situation">
+                        <label for="gamingDepends">Depends on the volume/situation</label>
+                    </div>
+                    
+                    <label><p id="para">3.</p> How would you rate your level of cleanliness?</label>
+                    <div>
+                        <input type="radio" id="cleanliness1" name="cleanliness" value="1">
+                        <label for="cleanliness1">1</label>
+                        <input type="radio" id="cleanliness2" name="cleanliness" value="2">
+                        <label for="cleanliness2">2</label>
+                        <input type="radio" id="cleanliness3" name="cleanliness" value="3">
+                        <label for="cleanliness3">3</label>
+                        <input type="radio" id="cleanliness4" name="cleanliness" value="4">
+                        <label for="cleanliness4">4</label>
+                        <input type="radio" id="cleanliness5" name="cleanliness" value="5">
+                        <label for="cleanliness5">5</label>
+                    </div>
+                    <label for="lifestyleDescription"><p id="para">4.</p> Describe what sets your lifestyle apart from others.
+                        (Optional)</label>
+                    <textarea id="lifestyleDescription" name="lifestyleDescription" rows="4"
+                        placeholder="Your answer"></textarea>
+                </div>
+
+                <h2>Privacy & Space</h2>
+                <div class="privacy">
+                    <label><p id="para">1.</p> How much privacy do you expect in your shared room?</label>
+                    <div>
+                        <input type="radio" id="privacyHigh" name="privacy" value="High privacy">
+                        <label for="privacyHigh">High privacy (e.g., limited interaction)</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="privacyModerate" name="privacy" value="Moderate privacy">
+                        <label for="privacyModerate">Moderate privacy</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="privacyLow" name="privacy" value="Low privacy">
+                        <label for="privacyLow">Low privacy (e.g., okay with more interaction and shared space)</label>
+                    </div>
+    
+                    <label><p id="para">2.</p> Do you prefer to have your own space or share common areas with your roommate?</label>
+                    <div>
+                        <input type="radio" id="spacePrivate" name="spacePreference" value="Prefer private space">
+                        <label for="spacePrivate">Prefer private space</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="spaceShared" name="spacePreference" value="Prefer to share common areas">
+                        <label for="spaceShared">Prefer to share common areas</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="spaceDepends" name="spacePreference" value="It depends on the situation">
+                        <label for="spaceDepends">It depends on the situation</label>
+                    </div>
+    
+                    <label><p id="para">3.</p> Would you be comfortable with guests occasionally visiting your room?</label>
+                    <div>
+                        <input type="radio" id="guestsYes" name="guestsComfort" value="Yes">
+                        <label for="guestsYes">Yes</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="guestsNo" name="guestsComfort" value="No">
+                        <label for="guestsNo">No</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="guestsDepends" name="guestsComfort" value="Depends on the situation">
+                        <label for="guestsDepends">Depends on the situation</label>
+                    </div>
+                </div>
+
+                <h2>Food Preferences</h2>
+                <div class="food">
+
+                    <label> <p id="para">1.</p>Would you mind your roommate bringing eggs or similar food items into the room?</label>
+                    <div>
+                        <input type="radio" id="foodMindYes" name="foodMind" value="Yes, I mind">
+                        <label for="foodMindYes">Yes, I mind</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="foodMindNo" name="foodMind" value="No, I don't mind">
+                        <label for="foodMindNo">No, I don't mind</label>
+                    </div>
+    
+                    <label><p id="para">2.</p> Would you bring such food items into the room?</label>
+                    <div>
+                        <input type="radio" id="bringFoodYes" name="bringFood" value="Yes">
+                        <label for="bringFoodYes">Yes</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="bringFoodNo" name="bringFood" value="No">
+                        <label for="bringFoodNo">No</label>
+                    </div>
+    
+                    <label><p id="para">3.</p> Are you a vegetarian, non-vegetarian, or do you eat eggs?</label>
+                    <div>
+                        <input type="radio" id="dietVegetarian" name="diet" value="Vegetarian">
+                        <label for="dietVegetarian">Vegetarian</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="dietNonVegetarian" name="diet" value="Non-vegetarian">
+                        <label for="dietNonVegetarian">Non-vegetarian</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="dietEggEater" name="diet" value="Egg eater">
+                        <label for="dietEggEater">Egg eater</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="dietOther" name="diet" value="Other">
+                        <label for="dietOther">Other:</label>
+                        <input type="text" id="dietOtherText" name="dietOtherText" placeholder="Specify">
+                    </div>
+                </div>
+
+
+                <script>
+                    function logout() {
+                        alert("You have been logged out.");
+                        window.location.href = "login.html";
+                    }
+
+                    document.getElementById("preferenceForm").addEventListener("submit", function (e) {
+                        e.preventDefault();
+                        alert("Your preferences have been submitted successfully!");
+                    });
+                </script>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

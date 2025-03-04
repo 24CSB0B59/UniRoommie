@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UniRoomie Dashboard</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            min-height: 100vh;
+            background: #f4f7f6;
+            width: 100vh;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 250px;
+            background: #333;
+            color: white;
+            padding: 1.5em;
+            box-shadow: 9px 0 7px rgba(0, 0, 0, 0.1);
+        }
+
+        .sidebar h2 {
+            font-size: 1.5em;
+            margin-bottom: 1.5em;
+            text-align: center;
+            color: #87CEEB;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .sidebar ul li {
+            margin: 1.5em 0;
+        }
+
+        .sidebar ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.1em;
+            transition: color 0.3s ease-in-out;
+        }
+
+        .sidebar ul li a:hover {
+            color: #4CAF50;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(to right, #4facfe, #00f2fe);
+            padding: 1em 2em;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 7px 8px rgba(0, 0, 0, 0.1);
+            width: calc(100% - 250px);
+            position: fixed;
+            top: 0;
+            left: 180px;
+            z-index: 1000;
+        }
+
+        .header .user-info {
+            display: flex;
+            align-items: center;
+        }
+
+        .header .user-info img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        .header .user-info span {
+            font-size: 1.1em;
+            color: #333;
+        }
+        .header .user-info:hover{
+            cursor: pointer;
+        }
+
+        .header button {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 0.8em 1.5em;
+            font-size: 1em;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background 0.3s ease-in-out;
+        }
+
+        .header button:hover {
+            background: #45a049;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-left: 250px;
+            margin-top: 80px; /* Adjust for header height */
+            padding: 2em;
+            width: calc(100% - 250px);
+            background: #f4f7f6;
+        }
+
+        .main-content h1 {
+            font-size: 2em;
+            color: #333;
+            margin-bottom: 1em;
+        }
+
+        .main-content p {
+            font-size: 1.1em;
+            line-height: 1.6;
+            color: #555;
+        }
+
+        /* Feedback Section */
+        .feedback-section {
+            width: 400px;
+            margin-top: 30px;
+            padding: 20px;
+            background: rgb(252, 238, 221);
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .feedback-section h2 {
+            margin: 5px;
+            font-size: 1.5em;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .feedback-section textarea {
+            width: 90%;
+            height: 70px;
+            padding: 10px;
+            margin: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            resize: none;
+        }
+
+        .feedback-section button {
+            margin-top: 10px;
+            margin-left: 40%;
+            padding: 10px 15px;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease-in-out;
+        }
+
+        .feedback-section button:hover {
+            background: #45a049;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+                padding: 1em;
+            }
+
+            .header {
+                width: 100%;
+                left: 0;
+                padding: 1em;
+            }
+
+            .main-content {
+                margin-left: 0;
+                margin-top: 150px; /* Adjust for stacked header and sidebar */
+                width: 100%;
+                padding: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <h2>UniRoomie</h2>
+        <ul>
+            <li><a href="dashboardLogin.html">Dashboard</a></li>
+            <li><a href="#roommates">Find Roommates</a></li>
+            <li><a href="#messages">Messages</a></li>
+            <li><a href="#settings">Change Room </a></li>
+            <li><a href="preference Page.html" target="_blank">Preference Form</a></li>
+            <li><a href="#help">Contact Us</a></li>
+        </ul>
+    </div>
+
+    <div class="header">
+        <div class="user-info">
+            <img src="user-icon.avif" alt="User Avatar">
+            <span>John Doe</span>
+        </div>
+        <button onclick="logout()">Logout</button>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <h1>Welcome to Your Dashboard</h1>
+        <p>Here you can manage your profile, find compatible roommates, and communicate with others. Start exploring now!</p>
+
+        <!-- Feedback Section -->
+        <div class="feedback-section">
+            <h2>We Value Your Feedback</h2>
+            <textarea id="feedback" placeholder="Share your thoughts..."></textarea>
+            <button onclick="submitFeedback()">Submit</button>
+        </div>
+    </div>
+
+    <script>
+        function logout() {
+            alert("You have been logged out.");
+            window.location.href = "login.html";
+        }
+
+        function submitFeedback() {
+            let feedbackText = document.getElementById("feedback").value.trim();
+            if (feedbackText === "") {
+                alert("Please enter your feedback before submitting.");
+            } else {
+                alert("Thank you for your feedback!");
+                document.getElementById("feedback").value = ""; // Clear the textarea
+            }
+        }
+    </script>
+</body>
+</html>

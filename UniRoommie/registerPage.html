@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            height: 100vh;
+            background: linear-gradient(to right, #4facfe, #00f2fe);
+            font-family: Arial, sans-serif;
+            margin: 0;
+        }
+        .logo {
+            display: flex;
+            justify-content: baseline;
+            align-content: baseline;
+        }
+        .logo img {
+            border-radius: 8px;
+        }
+        .login-container {
+            margin-left: 40%;
+            margin-top: 4%;
+            background: bisque;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+        }
+        .login-form h2 {
+            margin-bottom: 20px;
+        }
+        .input-group {
+            margin-bottom: 15px;
+        }
+        .input-group input {
+            width: 90%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            display: block;
+            margin: auto;
+        }
+        #confirm{
+            margin-top: 16px;
+        }
+        button {
+            width: 50%;
+            padding: 10px;
+            border: none;
+            background: #4facfe;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background: #00c2fe;
+        }
+        .error-message {
+            color: red;
+            margin-top: 10px;
+        }
+        .register-link {
+            margin-top: 15px;
+        }
+        .register-link a {
+            color: #4facfe;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .register-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="logo">
+        <img src="logo.webp" width="100px">
+    </div>
+    <div class="login-container">
+        <form class="login-form" id="form">
+            <h2>Register</h2>
+            <div class="input-group">
+                <input type="text" id="username" placeholder="Username" required>
+            </div>
+            <div class="input-group">
+                <input type="password" id="password" placeholder="Password" required>
+                <input type="password" id="confirm" placeholder="Confirm Password" required>
+            </div>
+            <button id="register" type="submit">Register</button>
+            <p class="error-message" id="error-message"></p>
+            <p class="register-link">Already have an account? <a href="login.html" target="_blank">Login here</a></p>
+        </form>
+    </div>
+    
+    <script>
+        let form = document.getElementById("form");
+        form.addEventListener("submit", function(event) {
+            let pwd = document.getElementById("password").value.trim();
+            let confirm = document.getElementById("confirm").value.trim();
+            let errorMessage = document.getElementById("error-message");
+
+            if (pwd !== confirm) {
+                errorMessage.textContent = "Confirm password and password do not match";
+                event.preventDefault();
+            } else {
+                errorMessage.textContent = ""; 
+            }
+        });
+    </script>
+
+</body>
+</html>

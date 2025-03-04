@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            height: 100vh;
+            background: linear-gradient(to right, #4facfe, #00f2fe);
+            font-family: Arial, sans-serif;
+            margin: 0;
+        }
+        .logo {
+            display: flex;
+            justify-content: baseline;
+            align-content: baseline;
+        }
+        .logo img {
+            border-radius: 8px;
+        }
+        .login-container {
+            margin-left: 40%;
+            margin-top: 4%;
+            background: bisque;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+        }
+        .login-form h2 {
+            margin-bottom: 20px;
+        }
+        .input-group {
+            margin-bottom: 15px;
+        }
+        .input-group input {
+            width: 90%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            width: 20%;
+            padding: 10px;
+            border: none;
+            background: #4facfe;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background: #00c2fe;
+        }
+        .error-message {
+            color: red;
+            margin-top: 10px;
+        }
+        .register-link {
+            margin-top: 15px;
+        }
+        .register-link a {
+            color: #4facfe;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .register-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="logo">
+        <img src="logo.webp" width="100px">
+    </div>
+    <div class="login-container">
+        <form class="login-form" onsubmit="return validateLogin()">
+            <h2>Login</h2>
+            <div class="input-group">
+                <input type="text" id="username" placeholder="Username" required>
+            </div>
+            <div class="input-group">
+                <input type="password" id="password" placeholder="Password" required>
+            </div>
+            <button type="submit">Login</button>
+            <p class="error-message" id="error-message"></p>
+            <p class="register-link">Don't have an account? <a href="registerPage.html" target="_blank">Register here</a></p>
+        </form>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
