@@ -19,7 +19,6 @@
 
         /* Sidebar */
         .sidebar {
-            position : fixed ;
             width: 250px;
             background: #333;
             color: white;
@@ -268,38 +267,52 @@
                 <label for="sleep">Sleep Schedule Compatibility:</label>
                 <input type="number" id="sleep" name="sleep" min="1" max="10">
             </div>
+
             <div class="form-group">
                 <label for="study">Study Habits:</label>
                 <input type="number" id="study" name="study" min="1" max="10">
             </div>
+
+            <div class="form-group">
+                <label for="study">Share Belongings</label>
+                <input type="number" id="study" name="study" min="1" max="10">
+            </div>
+
             <div class="form-group">
                 <label for="cleanliness">Cleanliness Level:</label>
                 <input type="number" id="cleanliness" name="cleanliness" min="1" max="10">
             </div>
-            <div class="form-group">
+
+            <!-- <div class="form-group">
                 <label for="noise">Noise Tolerance:</label>
                 <input type="number" id="noise" name="noise" min="1" max="10">
-            </div>
+            </div> -->
+
             <div class="form-group">
                 <label for="food">Food Preferences:</label>
                 <input type="number" id="food" name="food" min="1" max="10">
             </div>
-            <div class="form-group">
+
+            <!-- <div class="form-group">
                 <label for="culture">Cultural/Religious Sensitivities:</label>
                 <input type="number" id="culture" name="culture" min="1" max="10">
-            </div>
+            </div> -->
+
             <div class="form-group">
                 <label for="privacy">Privacy and Personal Boundaries:</label>
                 <input type="number" id="privacy" name="privacy" min="1" max="10">
             </div>
+
             <div class="form-group">
                 <label for="guests">Guest Policy:</label>
                 <input type="number" id="guests" name="guests" min="1" max="10">
             </div>
-            <div class="form-group">
+
+            <!-- <div class="form-group">
                 <label for="gaming">Comfort with Gaming:</label>
                 <input type="number" id="gaming" name="gaming" min="1" max="10">
-            </div>
+            </div> -->
+
             <button type="submit">Submit</button>
         </form>
     </div>
@@ -316,7 +329,7 @@
                 alert("Please enter your feedback before submitting.");
             } else {
                 alert("Thank you for your feedback!");
-                document.getElementById("feedback").value = ""; // Clear the textarea
+                document.getElementById("feedback").value = "";
             }
         }
     </script>
