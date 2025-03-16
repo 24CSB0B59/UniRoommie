@@ -4,9 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UniRoomie Dashboard</title>
+    <title>Ranking Preference</title>
     <style>
-        /* General Styles */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -17,7 +16,6 @@
             width: 100vh;
         }
 
-        /* Sidebar */
         .sidebar {
             width: 250px;
             background: #333;
@@ -208,7 +206,6 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            
             margin-bottom: 20px;
             width: 400px;
         }
@@ -233,6 +230,13 @@
             cursor: pointer;
             font-size: 16px;
         }
+
+        .error-message {
+            color: red;
+            font-size: 12px;
+            margin-top: 5px;
+            display: none;
+        }
     </style>
 </head>
 
@@ -241,12 +245,9 @@
         <h2>UniRoomie</h2>
         <ul>
             <li><a href="dashboardLogin.html">Dashboard</a></li>
-            <!-- <li><a href="#roommates">Find Roommates</a></li> -->
-            <!-- <li><a href="#messages">Messages</a></li> -->
-            <!-- <li><a href="#settings">Change Room </a></li> -->
-            <li><a href="preference Page.html" >Preference Form</a></li>
-            <li><a href="rankingPreference.html">Ranking <Form></Form></a></li>
-            <li><a href="">Complaints <Form></Form></a></li>
+            <li><a href="preference Page.html">Preference Form</a></li>
+            <li><a href="rankingPreference.html">Ranking Form</a></li>
+            <li><a href="">Complaints Form</a></li>
         </ul>
     </div>
 
@@ -256,64 +257,49 @@
             <span>John Doe</span>
         </div>
         <a href="homepage.html"><button onclick="logout()">Logout</button></a>
-
     </div>
 
     <!-- Main Content -->
     <div class="container">
         <h3>Rank most important among the following factors</h3>
-        <form>
+        <form id="rankingForm">
             <div class="form-group">
                 <label for="sleep">Sleep Schedule Compatibility:</label>
-                <input type="number" id="sleep" name="sleep" min="1" max="10">
+                <input type="number" id="sleep" name="sleep" min="1" max="10" oninput="validateInputs()">
             </div>
 
             <div class="form-group">
                 <label for="study">Study Habits:</label>
-                <input type="number" id="study" name="study" min="1" max="10">
+                <input type="number" id="study" name="study" min="1" max="10" oninput="validateInputs()">
             </div>
 
             <div class="form-group">
-                <label for="study">Share Belongings</label>
-                <input type="number" id="study" name="study" min="1" max="10">
+                <label for="share">Share Belongings:</label>
+                <input type="number" id="share" name="share" min="1" max="10" oninput="validateInputs()">
             </div>
 
             <div class="form-group">
                 <label for="cleanliness">Cleanliness Level:</label>
-                <input type="number" id="cleanliness" name="cleanliness" min="1" max="10">
+                <input type="number" id="cleanliness" name="cleanliness" min="1" max="10" oninput="validateInputs()">
             </div>
-
-            <!-- <div class="form-group">
-                <label for="noise">Noise Tolerance:</label>
-                <input type="number" id="noise" name="noise" min="1" max="10">
-            </div> -->
 
             <div class="form-group">
                 <label for="food">Food Preferences:</label>
-                <input type="number" id="food" name="food" min="1" max="10">
+                <input type="number" id="food" name="food" min="1" max="10" oninput="validateInputs()">
             </div>
-
-            <!-- <div class="form-group">
-                <label for="culture">Cultural/Religious Sensitivities:</label>
-                <input type="number" id="culture" name="culture" min="1" max="10">
-            </div> -->
 
             <div class="form-group">
                 <label for="privacy">Privacy and Personal Boundaries:</label>
-                <input type="number" id="privacy" name="privacy" min="1" max="10">
+                <input type="number" id="privacy" name="privacy" min="1" max="10" oninput="validateInputs()">
             </div>
 
             <div class="form-group">
                 <label for="guests">Guest Policy:</label>
-                <input type="number" id="guests" name="guests" min="1" max="10">
+                <input type="number" id="guests" name="guests" min="1" max="10" oninput="validateInputs()">
             </div>
 
-            <!-- <div class="form-group">
-                <label for="gaming">Comfort with Gaming:</label>
-                <input type="number" id="gaming" name="gaming" min="1" max="10">
-            </div> -->
-
-            <button type="submit">Submit</button>
+            <p id="errorMessage" class="error-message">All input fields must have unique values.</p>
+            <button type="submit" disabled id="submitButton">Submit</button>
         </form>
     </div>
 
@@ -323,15 +309,36 @@
             window.location.href = "login.html";
         }
 
-        function submitFeedback() {
-            let feedbackText = document.getElementById("feedback").value.trim();
-            if (feedbackText === "") {
-                alert("Please enter your feedback before submitting.");
+        function validateInputs() {
+            const inputs = [
+                document.getElementById("sleep").value,
+                document.getElementById("study").value,
+                document.getElementById("share").value,
+                document.getElementById("cleanliness").value,
+                document.getElementById("food").value,
+                document.getElementById("privacy").value,
+                document.getElementById("guests").value
+            ];
+
+            const submitButton = document.getElementById("submitButton");
+            const errorMessage = document.getElementById("errorMessage");
+
+            // Check if all values are unique
+            const uniqueValues = new Set(inputs);
+            if (uniqueValues.size === inputs.length && !inputs.includes("")) {
+                submitButton.disabled = false;
+                errorMessage.style.display = "none";
             } else {
-                alert("Thank you for your feedback!");
-                document.getElementById("feedback").value = "";
+                submitButton.disabled = true;
+                errorMessage.style.display = "block";
             }
         }
+
+        // Attach form submission handler
+        document.getElementById("rankingForm").addEventListener("submit", function (event) {
+            event.preventDefault();
+            alert("Form submitted successfully!");
+        });
     </script>
 </body>
 
